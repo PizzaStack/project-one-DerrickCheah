@@ -10,14 +10,42 @@
 </head>
 
 <body>
-    <section id="login">
-        <div class="container">
-            <h1>Employee Login</h1>
-            <input type="text" placeholder="username" id="username">
-            <input type="text" placeholder="password" id="password">
-            <button id="login">Log In</button>
-        </div>
-    </section>
+    <h1>Employee Log In</h1>
+    <button onclick="document.getElementById('id01').style.display='block'">Login</button>
+    <div id="id01" class="modal">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <form class="modal-content animate" action="#">
+            <div class="container">
+                <label for="username"><b>Username</b></label>
+                <input type="text" placeholder="Username" name="username" required>
+
+                <label for="password"><b>Password</b></label>
+                <input type="password" placeholder="Password" name="password" required>
+
+                <button type="submit">Login</button>
+
+                <label>
+                    <input type="checkbox" name="remember">Remember me</label>
+                </label>
+            </div>
+
+            <div class="container" style="background-color:#f1f1f1">
+                    <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancel">Cancel</button>
+                <span class="password"><a href="#">Forgot password?</a></span>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        var modal = document.getElementById('id01');
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
 </body>
 
 </html>
