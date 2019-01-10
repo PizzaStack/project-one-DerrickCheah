@@ -14,41 +14,17 @@
     left: 20px;
 }
 
-.profileicon {
-    position: absolute;
-    top: 5%;
-    left: 25%;
-    right: 25%;
+.responsive {
     width: 50%;
-    height: 10em;
-    width: 10em;
-    border: 2px solid black;
-    border-radius: 50%;
-    overflow: hidden;
+    height: auto;
+    margin-left: 25%;
+    margin-top: 5%;
 }
 
 .profile {
     border-bottom: 1px solid black;
     height: 35%;
     width: 100%;
-
-}
-
-.head {
-    background: black;
-    border-radius: 100%;
-    width: 45%;
-    height: 45%;
-    margin: 15% auto 5%;
-}
-
-.body {
-    background: black;
-    width: 65%;
-    height: 40%;
-    margin: auto;
-    border-top-left-radius: 50%;
-    border-top-right-radius: 50%;
 }
 
 .sidebar {
@@ -60,7 +36,7 @@
     background-color: #8d99ae;
 }
 
-.content {
+#content {
     position: fixed;
     top: 7%;
     right: 0;
@@ -72,9 +48,10 @@
 
 .navbar {
     height: 58%;
+    z-index: 1;
 }
 
-.navbar ul {
+.mainmenu {
     list-style-type: none;
     margin-top: 20px;
     padding: 0;
@@ -82,7 +59,7 @@
     width: 100%;
 }
 
-.navbar li a {
+.mainmenu a {
     font-size: 25px;
     display: block;
     color: black;
@@ -90,7 +67,17 @@
     padding: 20px 16px;
 }
 
-.navbar li a:hover {
+.submenu {
+    list-style-type: none;
+    display: none;
+}
+
+.submenu a {
+    font-size: 16px;
+    padding-left: 35px;
+}
+
+.navbar a:hover {
     background-color: #2b2d42;
     color: white;
 }
@@ -112,4 +99,38 @@
     position: absolute;
     bottom: 65%;
     left: 15%;
+}
+
+input[type="number"] {
+    display: block;
+    width: 30%;
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 5px;
+    margin: 20px 35% 20px 35%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+}
+
+#reimbursementform textarea {
+    display: block;
+    width: 30%;
+    height: 10%;
+    margin: 20px 35% 20px 35%;
+}
+
+input[type="file"] {
+    display: block;
+    margin: 20px 35% 20px 35%;
+}
+
+#reimbursementform h1 {
+    text-align: center;
+    margin-bottom: 11%;
+}
+
+#reimbursementform label {
+    margin: 20px 0 20px 35%;
 }

@@ -14,8 +14,7 @@
     <div class="sidebar">
         <div class="profile">
             <div class="profileicon">
-                <div class="head"></div>
-                <div class="body"></div>
+                <img src="../assets/blank-profile-image.png" class="responsive">
             </div>
 
             <div id="userinfo">
@@ -25,11 +24,16 @@
         </div>
 
         <div class="navbar">
-            <ul>
-                <li><a class="active" href="#">Home</a></li>
-                <li><a href="#">Reimbursement</a></li>
-                <li><a href="../index.html">Logout</a></li>
-            </ul>
+            <div class="mainmenu">
+                <a href="#" onclick="closeMenus()">Home</a>
+                <a href="#" class="dropdown">Reimbursement</a>
+                <div class="submenu">
+                    <a href="#" onclick="openPendingReimbursements()">View Pending</a>
+                    <a href="#" onclick="openResolvedReimbursements()">View Resolved</a>
+                    <a href="#" onclick="openReimbursementRequest()">Submit Request</a>
+                </div>
+                <a href="../index.html">Logout</a>
+            </div>
 
             <a href="#"><i class="material-icons">settings</i></a>
         </div>
@@ -39,9 +43,10 @@
         <h1>Cheah Industries</h1>
     </div>
 
-    <div class="content">
+    <div id="content"></div>
 
-    </div>
+    <script src="../js/employee.js"></script>
+
 </body>
 
 </html>
