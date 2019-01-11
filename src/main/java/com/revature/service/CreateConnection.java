@@ -6,12 +6,19 @@ import java.sql.SQLException;
 
 public class CreateConnection {
 
-	private final String url = "jdbc:postgresql//projectonedb.cshthkt1n48j.us-east-2.rds.amazonaws.com:5432/projectonedb";
+	private final String url = "jdbc:postgresql://projectonedb.cshthkt1n48j.us-east-2.rds.amazonaws.com:5432/projectonedb";
 	private final String username = "derrick_cheah";
 	private final String password = "c98woD9hoMGq";
 	private Connection connection;
 
 	public Connection getConnection() {
+
+		try {
+			Class.forName("org.postgresql.Driver");
+		} catch (java.lang.ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
+
 		try {
 			if (connection == null) {
 				return DriverManager.getConnection(url, username, password);
@@ -19,7 +26,6 @@ public class CreateConnection {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return connection;
 	}
 

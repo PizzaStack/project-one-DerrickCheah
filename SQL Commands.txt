@@ -1,0 +1,6 @@
+insert into employee values (Default, 'Employee', '1');
+
+select manager_status_insert(2, false);
+select login_insert('employee.test', 'test', 2);
+select info_insert(2, 'employee.test@cheahindustries.com', '111 North 1st St. Space, Space 11111', 
+				   to_date('11 Jan 1111', 'DD Mon YYYY'), '111-111-1111', '111-11-1111');
