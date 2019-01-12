@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.revature.DAO.LoginDAO;
+import com.revature.entity.User;
 import com.revature.service.CreateConnection;
 
 public class LoginServlet extends HttpServlet {
@@ -21,14 +22,19 @@ public class LoginServlet extends HttpServlet {
 		CreateConnection createConnection = new CreateConnection();
 		Connection connection = createConnection.getConnection();
 
-		LoginDAO login = new LoginDAO();
-		boolean isAbleToLogin = login.login(connection, request.getParameter("username"),
-				request.getParameter("password"));
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
 
-		if (isAbleToLogin) {
-			response.sendRedirect("http://localhost:8080/project-one-DerrickCheah/pages/employee.html");
+		LoginDAO login = new LoginDAO();
+
+		User user = login.find(connection, username, password);
+
+		if (user != null) {
+			request.getSession().setAttribute("user", user);
+			response.sendRedirect("/project-one-DerrickCheah/pages/employee.html");
 		} else {
-			response.sendRedirect("http://localhost:8080/project-one-DerrickCheah/");
+			request.setAttribute("error", "Unknown login, try again!");
+			request.getRequestDispatcher("/project-one-DerrickCheah/index.html").forward(request, response);
 		}
 
 		createConnection.closeConnection(connection);

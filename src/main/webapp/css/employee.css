@@ -1,136 +1,146 @@
 .topbar {
-    background-color: #2b2d42;
-    position: fixed;
-    width: 100%;
-    left: 0;
-    top: 0;
-    bottom: 93%;
+	background-color: #2b2d42;
+	position: fixed;
+	width: 100%;
+	left: 0;
+	top: 0;
+	bottom: 93%;
 }
 
 .topbar h1 {
-    color: white;
-    position: fixed;
-    bottom: 92%;
-    left: 20px;
+	color: white;
+	position: fixed;
+	bottom: 92%;
+	left: 20px;
 }
 
 .responsive {
-    width: 50%;
-    height: auto;
-    margin-left: 25%;
-    margin-top: 5%;
+	width: 50%;
+	height: auto;
+	margin-left: 25%;
+	margin-top: 5%;
 }
 
 .profile {
-    border-bottom: 1px solid black;
-    height: 35%;
-    width: 100%;
+	border-bottom: 1px solid black;
+	height: 35%;
+	width: 100%;
 }
 
 .sidebar {
-    height: 100%;
-    position: fixed;
-    top: 7%;
-    left: 0;
-    right: 75%;
-    background-color: #8d99ae;
+	height: 100%;
+	position: fixed;
+	top: 7%;
+	left: 0;
+	right: 75%;
+	background-color: #8d99ae;
 }
 
 #content {
-    position: fixed;
-    top: 7%;
-    right: 0;
-    height: 100%;
-    width: 75%;
-    left: 25%;
-    background-color: #edf2f4;
+	position: fixed;
+	top: 7%;
+	right: 0;
+	height: 100%;
+	width: 75%;
+	left: 25%;
+	background-color: #edf2f4;
 }
 
 .navbar {
-    height: 58%;
-    z-index: 1;
+	height: 58%;
+	z-index: 1;
 }
 
 .mainmenu {
-    list-style-type: none;
-    margin-top: 20px;
-    padding: 0;
-    left: 0;
-    width: 100%;
+	list-style-type: none;
+	margin-top: 20px;
+	padding: 0;
+	left: 0;
+	width: 100%;
 }
 
 .mainmenu a {
-    font-size: 25px;
-    display: block;
-    color: black;
-    text-decoration: none;
-    padding: 20px 16px;
+	font-size: 25px;
+	display: block;
+	color: black;
+	text-decoration: none;
+	padding: 20px 16px;
 }
 
 .submenu {
-    list-style-type: none;
-    display: none;
+	list-style-type: none;
+	display: none;
 }
 
 .submenu a {
-    font-size: 16px;
-    padding-left: 35px;
+	font-size: 16px;
+	padding-left: 35px;
 }
 
 .navbar a:hover {
-    background-color: #2b2d42;
-    color: white;
+	background-color: #2b2d42;
+	color: white;
 }
 
 .material-icons {
-    color: black;
-    position: fixed;
-    bottom: 10px;
-    left: 10px;
+	color: black;
+	position: fixed;
+	bottom: 10px;
+	left: 10px;
 }
 
 .material-icons:hover {
-    color: white;
+	color: white;
 }
 
 #userinfo {
-    font-weight: bold;
-    font-size: 17px;
-    position: absolute;
-    bottom: 65%;
-    left: 15%;
+	font-weight: bold;
+	font-size: 17px;
+	position: absolute;
+	bottom: 65%;
+	left: 15%;
 }
 
 input[type="number"] {
-    display: block;
-    width: 30%;
-    border-radius: 20px;
-    padding-left: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-right: 5px;
-    margin: 20px 35% 20px 35%;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
+	display: block;
+	width: 30%;
+	border-radius: 20px;
+	padding-left: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-right: 5px;
+	margin: 20px 35% 20px 35%;
+	box-sizing: border-box;
+	border: 1px solid #ccc;
+}
+
+input[type="number"]:focus {
+	outline: none;
 }
 
 #reimbursementform textarea {
-    display: block;
-    width: 30%;
-    height: 10%;
-    margin: 20px 35% 20px 35%;
+	border-radius: 10px;
+	display: block;
+	width: 30%;
+	height: 10%;
+	margin: 20px 35% 20px 35%;
+	display: block;
+	box-sizing: border-box;
+	border: 1px solid #ccc;
+	padding-left: 15px;
+	padding-top: 10px;
 }
 
 input[type="file"] {
-    display: block;
-    margin: 20px 35% 20px 35%;
+	display: block;
+	margin: 20px 35% 20px 35%;
 }
 
 #reimbursementform h1 {
-    text-align: center;
-    margin-bottom: 11%;
+	text-align: center;
+	margin-bottom: 11%;
 }
 
 #reimbursementform label {
-    margin: 20px 0 20px 35%;
+	margin: 20px 0 20px 35%;
 }
