@@ -110,8 +110,8 @@ public class User implements Serializable {
 	@Override
 	public String toString() {
 		return String.format(
-				"Name: %s/n" + "Email: %s/n" + "Username: %s/n" + "Birthdate: %s/n" + "Address: %s/n"
-						+ "Phone Number: %s/n" + "SSN: %s/n" + "Manager: %b",
+				"Name: %s\n" + "Email: %s\n" + "Username: %s\n" + "Birthdate: %s\n" + "Address: %s\n"
+						+ "Phone Number: %s\n" + "SSN: %s\n" + "Manager: %b",
 				firstName + lastName, email, username, dob, address, phoneNumber, ssn, manager);
 	}
 }

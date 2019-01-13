@@ -29,12 +29,14 @@ public class LoginServlet extends HttpServlet {
 
 		User user = login.find(connection, username, password);
 
-		if (user != null) {
+		if (user != null && user.getManager() == false) {
 			request.getSession().setAttribute("user", user);
 			response.sendRedirect("/project-one-DerrickCheah/pages/employee.html");
+		} else if (user != null && user.getManager() == true) {
+			request.getSession().setAttribute("user", user);
+			response.sendRedirect("/project-one-DerrickCheah/pages/manager.html");
 		} else {
-			request.setAttribute("error", "Unknown login, try again!");
-			request.getRequestDispatcher("/project-one-DerrickCheah/index.html").forward(request, response);
+			request.getRequestDispatcher("/index.html").forward(request, response);
 		}
 
 		createConnection.closeConnection(connection);
