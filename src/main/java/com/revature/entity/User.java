@@ -1,4 +1,4 @@
-package com.revature.entity;
+	package com.revature.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -110,8 +110,8 @@ public class User implements Serializable {
 	@Override
 	public String toString() {
 		return String.format(
-				"Name: %s\n" + "Email: %s\n" + "Username: %s\n" + "Birthdate: %s\n" + "Address: %s\n"
-						+ "Phone Number: %s\n" + "SSN: %s\n" + "Manager: %b",
-				firstName + lastName, email, username, dob, address, phoneNumber, ssn, manager);
+				"Name: %s, " + "Email: %s, " + "Username: %s, " + "Birthdate: %s, " + "Address: %s, "
+						+ "Phone Number: %s, " + "SSN: %s, " + "Manager: %b",
+				(firstName + " " + lastName), email, username, dob, address, phoneNumber, ssn, manager);
 	}
 }

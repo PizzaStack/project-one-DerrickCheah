@@ -1,3 +1,29 @@
+window.onload = function() {
+	home();
+}
+
+function home() {
+    var x = document.getElementById("content");
+
+    let xhr = new XMLHttpRequest();
+    
+    xhr.open("GET", "../UserInfo");
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var resp = JSON.parse(xhr.responseText);
+            x.innerHTML = `<h1>Welcome ${resp.Name}<br>
+            Email: ${resp.Email}<br>
+            Username: ${resp.Username}<br>
+            Birthday: ${resp.Birthdate}<br>
+            Address: ${resp.Address}<br>
+            Phone Number: ${resp.Number}<br>
+            SSN: ${resp.SSN}<br></h1>`;
+        }
+    }
+    xhr.send();
+}
+
 function openReimbursementRequest() {
     var x = document.getElementById("content");
     x.innerHTML = 
@@ -14,11 +40,6 @@ function openReimbursementRequest() {
             <input type="file" class="file" multiple>
         </form>
         `;
-}
-
-function closeMenus() {
-    var x = document.getElementById("content");
-    x.innerHTML = `<h1>Home</h1>`;
 }
 
 function openResolvedReimbursements() {

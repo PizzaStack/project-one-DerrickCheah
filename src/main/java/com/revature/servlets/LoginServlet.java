@@ -19,11 +19,13 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		
 		CreateConnection createConnection = new CreateConnection();
 		Connection connection = createConnection.getConnection();
 
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
 
 		LoginDAO login = new LoginDAO();
 
@@ -31,12 +33,12 @@ public class LoginServlet extends HttpServlet {
 
 		if (user != null && user.getManager() == false) {
 			request.getSession().setAttribute("user", user);
-			response.sendRedirect("/project-one-DerrickCheah/pages/employee.html");
+			response.sendRedirect("pages/employee.html");
 		} else if (user != null && user.getManager() == true) {
 			request.getSession().setAttribute("user", user);
-			response.sendRedirect("/project-one-DerrickCheah/pages/manager.html");
+			response.sendRedirect("pages/manager.html");
 		} else {
-			request.getRequestDispatcher("/index.html").forward(request, response);
+			request.getRequestDispatcher("index.html").forward(request, response);
 		}
 
 		createConnection.closeConnection(connection);

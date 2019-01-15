@@ -18,11 +18,18 @@ public class CreateConnection {
 		} catch (java.lang.ClassNotFoundException e) {
 			System.out.println(e.getMessage());
 		}
+		
+//		try {
+//			DriverManager.registerDriver(new org.postgresql.Driver());
+//		} catch (SQLException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 
 		try {
 			if (connection == null) {
-				return DriverManager.getConnection(url, username, password);
-			}
+				connection = DriverManager.getConnection(url, username, password);
+			} 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

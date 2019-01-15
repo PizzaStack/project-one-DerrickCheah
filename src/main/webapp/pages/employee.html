@@ -1,53 +1,55 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="author" content="Derrick">
-    <meta name="viewport" content="width = device-width, initial-scale = 1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie = edge">
-    <title>Employee Homepage</title>
-    <link type="text/css" rel="stylesheet" href="../css/employee.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="author" content="Derrick">
+<meta name="viewport"
+	content="width = device-width, initial-scale = 1.0">
+<meta http-equiv="X-UA-Compatible" content="ie = edge">
+<title>Employee Homepage</title>
+<link type="text/css" rel="stylesheet" href="../css/employee.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
 </head>
 
 <body>
-    <div class="sidebar">
-        <div class="profile">
-            <div class="profileicon">
-                <img src="../assets/blank-profile-image.png" class="responsive">
-            </div>
+	<div class="sidebar">
+		<div class="profile">
+			<div class="profileicon">
+				<img src="../assets/blank-profile-image.png" class="responsive">
+			</div>
 
-            <div id="userinfo">
-                <p>Name: </p>
-                <p>Email: </p>
-            </div>
-        </div>
+			<div id="userinfo">
+				<p>Name:</p>
+				<p>Email:</p>
+			</div>
+		</div>
 
-        <div class="navbar">
-            <div class="mainmenu">
-                <a href="#" onclick="closeMenus()">Home</a>
-                <a href="#" class="dropdown">Reimbursement</a>
-                <div class="submenu">
-                    <a href="#" onclick="openPendingReimbursements()">View Pending</a>
-                    <a href="#" onclick="openResolvedReimbursements()">View Resolved</a>
-                    <a href="#" onclick="openReimbursementRequest()">Submit Request</a>
-                </div>
-                <form action="../LogoutServlet" method="GET">
+		<div class="navbar">
+			<div class="mainmenu">
+				<a href="#" onclick="home()">Home</a> <a href="#" class="dropdown">Reimbursement</a>
+				<div class="submenu">
+					<a href="#" onclick="openPendingReimbursements()">View Pending</a>
+					<a href="#" onclick="openResolvedReimbursements()">View
+						Resolved</a> <a href="#" onclick="openReimbursementRequest()">Submit
+						Request</a>
+				</div>
+				<form action="../LogoutServlet" method="GET">
 					<button type="submit" class="logoutbtn">Logout</button>
 				</form>
-            </div>
+			</div>
 
-            <a href="#"><i class="material-icons">settings</i></a>
-        </div>
-    </div>
+			<a href="#"><i class="material-icons">settings</i></a>
+		</div>
+	</div>
 
-    <div class="topbar">
-        <h1>Cheah Industries</h1>
-    </div>
+	<div class="topbar">
+		<h1>Cheah Industries</h1>
+	</div>
 
-    <div id="content"></div>
+	<div id="content"></div>
 
-    <script src="../js/employee.js"></script>
+	<script src="../js/employee.js"></script>
 
 </body>
 
