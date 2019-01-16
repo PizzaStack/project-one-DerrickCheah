@@ -9,7 +9,7 @@ import com.revature.entity.User;
 
 public class LoginDAO {
 
-	private static final String LOGIN_BY_USERNAME_AND_PASSWORD = "SELECT employee.firstname, employee.lastname, login.username, login.password, info.email, info.address, info.dob, info.phone, info.ssn, manager.manager from info left join employee on employee.id = info.id left join login on login.id = info.id left join manager on manager.id = info.id where login.username = ? and login.password = ?";
+	private static final String LOGIN_BY_USERNAME_AND_PASSWORD = "SELECT employee.id, employee.firstname, employee.lastname, login.username, login.password, info.email, info.address, info.dob, info.phone, info.ssn, manager.manager from info left join employee on employee.id = info.id left join login on login.id = info.id left join manager on manager.id = info.id where login.username = ? and login.password = ?";
 
 	public User find(Connection connection, String username, String password) {
 		User user = null;
@@ -33,6 +33,7 @@ public class LoginDAO {
 
 	private static User map(ResultSet rs) throws SQLException {
 		User user = new User();
+		user.setId(rs.getLong("id"));
 		user.setFirstName(rs.getString("firstname"));
 		user.setLastName(rs.getString("lastname"));
 		user.setEmail(rs.getString("email"));

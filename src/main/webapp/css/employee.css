@@ -146,6 +146,7 @@ input[type="number"]:focus {
 	border: 1px solid #ccc;
 	padding-left: 15px;
 	padding-top: 10px;
+	outline: none;
 }
 
 input[type="file"] {
@@ -160,4 +161,15 @@ input[type="file"] {
 
 #reimbursementform label {
 	margin: 20px 0 20px 35%;
+}
+
+#reimbursementform button {
+	background-color: #4158d6;
+	color: white;
+	border-radius: 20px;
+	padding: 14px 20px;
+	margin-left: 40%;
+	border: none;
+	cursor: pointer;
+	width: 20%;
 }

@@ -111,7 +111,7 @@ public class User implements Serializable {
 	public String toString() {
 		return String.format(
 				"Name: %s, " + "Email: %s, " + "Username: %s, " + "Birthdate: %s, " + "Address: %s, "
-						+ "Phone Number: %s, " + "SSN: %s, " + "Manager: %b",
-				(firstName + " " + lastName), email, username, dob, address, phoneNumber, ssn, manager);
+						+ "Phone Number: %s, " + "SSN: %s, " + "Manager: %b, " + "id: %d",
+				(firstName + " " + lastName), email, username, dob, address, phoneNumber, ssn, manager, id);
 	}
 }

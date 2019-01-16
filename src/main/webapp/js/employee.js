@@ -4,13 +4,14 @@ window.onload = function() {
 
 function home() {
     var x = document.getElementById("content");
+    var y = document.getElementById("userinfo");
 
     let xhr = new XMLHttpRequest();
     
     xhr.open("GET", "../UserInfo");
 
     xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
+        if (xhr.readyState === 4 && xhr.status === 200) {
             var resp = JSON.parse(xhr.responseText);
             x.innerHTML = `<h1>Welcome ${resp.Name}<br>
             Email: ${resp.Email}<br>
@@ -19,25 +20,32 @@ function home() {
             Address: ${resp.Address}<br>
             Phone Number: ${resp.Number}<br>
             SSN: ${resp.SSN}<br></h1>`;
+            
+            y.innerHTML = `<p>Name: ${resp.Name}<br>
+            				Email: ${resp.Email}</p>`;
         }
     }
     xhr.send();
 }
 
 function openReimbursementRequest() {
+	
     var x = document.getElementById("content");
+   
     x.innerHTML = 
-        `<form id="reimbursementform">
+        `<form id="reimbursementform" method="POST" action="../SubmitReimbursementServlet">
             <h1>Reimbursement Form</h1>
 
             <label for="description"><b>Description</b></label>
-            <textarea name="description" placeholder="Enter Description..." required></textarea>
+            <textarea maxlength="100" name="description" placeholder="Enter Description..." required></textarea>
 
             <label for="expensecost"><b>Cost</b></label>
             <input type="number" step="0.01" name="expensecost" min="0" required>
 
             <label for="file"><b>Upload Document (Optional)</b></label>
             <input type="file" class="file" multiple>
+            
+            <button type="submit" id="submitreimbursement">Submit</button>
         </form>
         `;
 }

@@ -31,6 +31,15 @@
 		<servlet-name>UserInfoServlet</servlet-name>
 		<url-pattern>/UserInfo</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>SubmitReimbursementServlet</servlet-name>
+		<servlet-class>com.revature.servlets.SubmitReimbursementServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SubmitReimbursementServlet</servlet-name>
+		<url-pattern>/SubmitReimbursementServlet</url-pattern>
+	</servlet-mapping>
 
 	<filter>
 		<filter-name>LoginFilter</filter-name>
