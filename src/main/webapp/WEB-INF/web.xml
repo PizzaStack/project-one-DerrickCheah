@@ -31,7 +31,7 @@
 		<servlet-name>UserInfoServlet</servlet-name>
 		<url-pattern>/UserInfo</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>SubmitReimbursementServlet</servlet-name>
 		<servlet-class>com.revature.servlets.SubmitReimbursementServlet</servlet-class>
@@ -40,7 +40,7 @@
 		<servlet-name>SubmitReimbursementServlet</servlet-name>
 		<url-pattern>/SubmitReimbursementServlet</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>PendingReimbursementServlet</servlet-name>
 		<servlet-class>com.revature.servlets.PendingReimbursementServlet</servlet-class>
@@ -49,7 +49,7 @@
 		<servlet-name>PendingReimbursementServlet</servlet-name>
 		<url-pattern>/PendingReimbursement</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>ResolvedReimbursementServlet</servlet-name>
 		<servlet-class>com.revature.servlets.ResolvedReimbursementServlet</servlet-class>
@@ -58,7 +58,7 @@
 		<servlet-name>ResolvedReimbursementServlet</servlet-name>
 		<url-pattern>/ResolvedReimbursement</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>DeniedReimbursementServlet</servlet-name>
 		<servlet-class>com.revature.servlets.DeniedReimbursementServlet</servlet-class>
@@ -67,7 +67,7 @@
 		<servlet-name>DeniedReimbursementServlet</servlet-name>
 		<url-pattern>/DeniedReimbursement</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>ViewEmployeeServlet</servlet-name>
 		<servlet-class>com.revature.servlets.ViewEmployeeServlet</servlet-class>
@@ -75,6 +75,15 @@
 	<servlet-mapping>
 		<servlet-name>ViewEmployeeServlet</servlet-name>
 		<url-pattern>/ViewEmployee</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>PendingReimbursementManagerServlet</servlet-name>
+		<servlet-class>com.revature.servlets.PendingReimbursementManagerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PendingReimbursementManagerServlet</servlet-name>
+		<url-pattern>/PendingReimbursementManager</url-pattern>
 	</servlet-mapping>
 
 	<filter>
