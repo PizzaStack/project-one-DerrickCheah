@@ -16,31 +16,56 @@ function openReimbursementRequest() {
 
             <label for="file"><b>Upload Document (Optional)</b></label>
             <input type="file" class="file" multiple>
-        </form>
-        `;
+        </form>`;
 }
 
 function home() {
-    var x = document.getElementById("content");
+    var x = document.getElementById("content")
+    
+    x.innerHTML = `
+                    <h1 id="welcome"></h1>
+                    <div class="card">
+    	                <div class="card-body">
+        	                <table class="table">
+            	                <thead>
+               		                <tr>
+                    	                <th scope="col">Username</th>
+                                        <th scope="col">Birthday</th>
+                                        <th scope="col">Address</th>
+                                        <th scope="col">Phone</th>
+                                        <th scope="col">SSN</th>
+                	                </tr>
+            	                </thead>
+            	                <tbody id="tablecontent"></tbody>
+        	                </table>
+    	                </div>
+                    </div>`;
+
+    var data = document.getElementById("tablecontent");
     var y = document.getElementById("userinfo");
+    var z = document.getElementById("welcome");
 
     let xhr = new XMLHttpRequest();
-    
+
     xhr.open("GET", "../UserInfo");
 
-    xhr.onreadystatechange = function() {
+    xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             let resp = JSON.parse(xhr.responseText);
-            x.innerHTML = `<h1>Welcome ${resp.Name}<br>
-            Email: ${resp.Email}<br>
-            Username: ${resp.Username}<br>
-            Birthday: ${resp.Birthdate}<br>
-            Address: ${resp.Address}<br>
-            Phone Number: ${resp.Number}<br>
-            SSN: ${resp.SSN}<br></h1>`;
-            
+
             y.innerHTML = `<p>Name: ${resp.Name}<br>
             				Email: ${resp.Email}</p>`;
+
+            z.innerHTML = `Welcome ${resp.Name}`;
+
+            data.innerHTML +=  `
+                                <tr>
+                                    <td>${resp.Username}</td>
+                                    <td>${resp.Birthdate}</td>
+                                    <td>${resp.Address}</td>
+                                    <td>${resp.Number}</td>
+                                    <td>${resp.SSN}</td>
+                                </tr>`;
         }
     }
     xhr.send();
@@ -86,8 +111,26 @@ function openPendingReimbursements() {
 }
 
 function viewEmployees() {
-    var x = document.getElementById("content");
-    x.innerHTML = "<h1>Employee List</h1>";
+    var x = document.getElementById("content")
+    
+    x.innerHTML = `
+    <h1>Employee List</h1>
+    <div class="card">
+    	<div class="card-body">
+        	<table class="table">
+            	<thead>
+               		<tr>
+                    	<th scope="col">Employee ID</th>
+                        <th scope="col">Employee Name</th>
+                	</tr>
+            	</thead>
+            	<tbody id="tablecontent">
+            	</tbody>
+        	</table>
+    	</div>
+    </div>`;
+
+    var y = document.getElementById("tablecontent");
 
     let xhr = new XMLHttpRequest();
 
@@ -98,7 +141,11 @@ function viewEmployees() {
             let resp = JSON.parse(xhr.responseText);
             for (i in resp) {
                 json = resp[i];
-                x.innerHTML += `<p>Employee ID: ${json.id}, Employee Name: ${json.firstName + " " + json.lastName}</p><br>`;
+                y.innerHTML += `
+                                <tr>
+                                    <td>${json.id}</td>
+                                    <td>${json.firstName + " " + json.lastName}</td>
+                                </tr>`;
             }
         }
     }

@@ -47,13 +47,18 @@
 }
 
 .navbar {
+	overflow-y: scroll;
 	height: 58%;
 	z-index: 1;
 }
 
+.navbar a:hover {
+	background-color: #2b2d42;
+	color: white;
+}
+
 .mainmenu {
 	list-style-type: none;
-	margin-top: 20px;
 	padding: 0;
 	left: 0;
 	width: 100%;
@@ -92,11 +97,6 @@
 .submenu a {
 	font-size: 16px;
 	padding-left: 35px;
-}
-
-.navbar a:hover {
-	background-color: #2b2d42;
-	color: white;
 }
 
 .material-icons {
@@ -146,6 +146,7 @@ input[type="number"]:focus {
 	border: 1px solid #ccc;
 	padding-left: 15px;
 	padding-top: 10px;
+	outline: none;
 }
 
 input[type="file"] {

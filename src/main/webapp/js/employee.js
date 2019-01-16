@@ -1,38 +1,64 @@
-window.onload = function() {
-	home();
+window.onload = function () {
+    home();
 }
 
 function home() {
-    var x = document.getElementById("content");
+    var x = document.getElementById("content")
+    
+    x.innerHTML = `
+    <h1 id="welcome"></h1>
+    <div class="card">
+    	<div class="card-body">
+        	<table class="table">
+            	<thead>
+               		<tr>
+                    	<th scope="col">Username</th>
+                        <th scope="col">Birthday</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">SSN</th>
+                	</tr>
+            	</thead>
+            	<tbody id="tablecontent">
+            	</tbody>
+        	</table>
+    	</div>
+    </div>`;
+
+    var data = document.getElementById("tablecontent");
     var y = document.getElementById("userinfo");
+    var z = document.getElementById("welcome");
 
     let xhr = new XMLHttpRequest();
-    
+
     xhr.open("GET", "../UserInfo");
 
-    xhr.onreadystatechange = function() {
+    xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             let resp = JSON.parse(xhr.responseText);
-            x.innerHTML = `<h1>Welcome ${resp.Name}<br>
-            Email: ${resp.Email}<br>
-            Username: ${resp.Username}<br>
-            Birthday: ${resp.Birthdate}<br>
-            Address: ${resp.Address}<br>
-            Phone Number: ${resp.Number}<br>
-            SSN: ${resp.SSN}<br></h1>`;
-            
+
             y.innerHTML = `<p>Name: ${resp.Name}<br>
             				Email: ${resp.Email}</p>`;
+
+            z.innerHTML = `Welcome ${resp.Name}`;
+
+            data.innerHTML += `<tr>
+                                <td>${resp.Username}</td>
+                                <td>${resp.Birthdate}</td>
+                                <td>${resp.Address}</td>
+                                <td>${resp.Number}</td>
+                                <td>${resp.SSN}</td>
+                            </tr>`;
         }
     }
     xhr.send();
 }
 
 function openReimbursementRequest() {
-	
+
     var x = document.getElementById("content");
-   
-    x.innerHTML = 
+
+    x.innerHTML =
         `<form id="reimbursementform" method="POST" action="../SubmitReimbursementServlet">
             <h1>Reimbursement Form</h1>
 
@@ -51,40 +77,85 @@ function openReimbursementRequest() {
 }
 
 function openResolvedReimbursements() {
-    var x = document.getElementById("content");
-    x.innerHTML = `<h1>Resolved Reimbursements</h1>`;
+    var x = document.getElementById("content")
     
+    x.innerHTML = `
+    <h1>Resolved Requests</h1>
+    <div class="card">
+    	<div class="card-body">
+        	<table class="table">
+            	<thead>
+               		<tr>
+                    	<th scope="col">Description</th>
+                    	<th scope="col">Cost</th>
+                	</tr>
+            	</thead>
+            	<tbody id="tablecontent">
+            	</tbody>
+        	</table>
+    	</div>
+    </div>`;
+
+    var y = document.getElementById("tablecontent")
+
     let xhr = new XMLHttpRequest();
-    
+
     xhr.open("GET", "../ResolvedReimbursement");
-    
-    xhr.onreadystatechange = function() {
-    	if (xhr.readyState === 4 && xhr.status === 200) {
-    		let resp = JSON.parse(xhr.responseText);
-    		for (i in resp) {
-    			json = resp[i];
-    			x.innerHTML += `<p>Description: ${json.description}, Cost: $${json.cost}</p><br>`;
-    		}
-    	}
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            let resp = JSON.parse(xhr.responseText);
+            for (i in resp) {
+                json = resp[i];
+                y.innerHTML += `<tr>
+                                    <td>${json.description}</td>
+                                    <td>$${json.cost}</td>
+                                </tr>`;
+            }
+        }
     }
     xhr.send();
 }
 
 function openPendingReimbursements() {
-    var x = document.getElementById("content");
-    x.innerHTML = "<h1>Pending Requests</h1>";
+	
+    var x = document.getElementById("content")
     
+    x.innerHTML = `
+    <h1>Pending Requests</h1>
+    <div class="card">
+    	<div class="card-body">
+        	<table class="table">
+            	<thead>
+               		<tr>
+                    	<th scope="col">Description</th>
+                    	<th scope="col">Cost</th>
+                	</tr>
+            	</thead>
+            	<tbody id="tablecontent">
+            	</tbody>
+        	</table>
+    	</div>
+    </div>`;
+    
+    var y = document.getElementById("tablecontent");
+
     let xhr = new XMLHttpRequest();
-    
+
     xhr.open("GET", "../PendingReimbursement");
-    xhr.onreadystatechange = function() {
-    	if (xhr.readyState === 4 && xhr.status === 200) {
-    		let resp = JSON.parse(xhr.responseText);
-    		for (i in resp) {
-    			json = resp[i];
-    			x.innerHTML += `<p>Description: ${json.description}, Cost: $${json.cost}</p><br>`;
-    		}
-    	}
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            let resp = [];
+        	resp = JSON.parse(xhr.responseText);
+            
+            for (i in resp) {
+                json = resp[i];
+                y.innerHTML += `<tr>
+                                    <td>${json.description}</td>
+                                    <td>$${json.cost}</td>
+                                </tr>`;
+            }
+        }
     }
     xhr.send();
 }

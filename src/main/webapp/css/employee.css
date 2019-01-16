@@ -51,6 +51,11 @@
 	z-index: 1;
 }
 
+.navbar a:hover {
+	background-color: #2b2d42;
+	color: white;
+}
+
 .logoutbtn {
 	background-color: transparent;
 	border: none;
@@ -92,11 +97,6 @@
 .submenu a {
 	font-size: 16px;
 	padding-left: 35px;
-}
-
-.navbar a:hover {
-	background-color: #2b2d42;
-	color: white;
 }
 
 .material-icons {
