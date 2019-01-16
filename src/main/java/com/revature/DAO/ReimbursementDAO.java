@@ -2,12 +2,19 @@ package com.revature.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonArrayBuilder;
 
 public class ReimbursementDAO {
 
 	private static final String ADD_REIMBURSEMENT_REQUEST = "INSERT INTO reimbursement VALUES (?, ?, ?, true)";
-
+	private static final String VIEW_PENDING_REQUEST = "SELECT reimbursement.description, reimbursement.cost FROM reimbursement where id = ? and pending = true";
+	private static final String VIEW_RESOLVED_REQUEST = "SELECT reimbursement.description, reimbursement.cost FROM reimbursement where id = ? and pending = false";
+	
 	public void uploadReimbursement(Connection connection, String description, double expenseCost, long id) {
 		try {
 			PreparedStatement ps = connection.prepareStatement(ADD_REIMBURSEMENT_REQUEST);
@@ -18,5 +25,44 @@ public class ReimbursementDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public JsonArray viewPending(Connection connection, long id) {
+		JsonArrayBuilder values = Json.createArrayBuilder();
+		try {
+			PreparedStatement ps = connection.prepareStatement(VIEW_PENDING_REQUEST);
+			ps.setLong(1, id);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				values.add(Json.createObjectBuilder()
+						.add("description", rs.getString(1))
+						.add("cost", rs.getDouble(2)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		JsonArray table = values.build();
+		return table;
+	}
+	
+	public JsonArray viewResolved(Connection connection, long id) {
+		JsonArrayBuilder values = Json.createArrayBuilder();
+		try {
+			PreparedStatement ps = connection.prepareStatement(VIEW_RESOLVED_REQUEST);
+			ps.setLong(1, id);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				values.add(Json.createObjectBuilder()
+						.add("description", rs.getString(1))
+						.add("cost", rs.getDouble(2)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		JsonArray table = values.build();
+		return table;
 	}
 }

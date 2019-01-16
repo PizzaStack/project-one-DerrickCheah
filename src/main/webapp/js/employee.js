@@ -12,7 +12,7 @@ function home() {
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            var resp = JSON.parse(xhr.responseText);
+            let resp = JSON.parse(xhr.responseText);
             x.innerHTML = `<h1>Welcome ${resp.Name}<br>
             Email: ${resp.Email}<br>
             Username: ${resp.Username}<br>
@@ -52,12 +52,41 @@ function openReimbursementRequest() {
 
 function openResolvedReimbursements() {
     var x = document.getElementById("content");
-    x.innerHTML = `<h1>Resolved</h1>`;
+    x.innerHTML = `<h1>Resolved Reimbursements</h1>`;
+    
+    let xhr = new XMLHttpRequest();
+    
+    xhr.open("GET", "../ResolvedReimbursement");
+    
+    xhr.onreadystatechange = function() {
+    	if (xhr.readyState === 4 && xhr.status === 200) {
+    		let resp = JSON.parse(xhr.responseText);
+    		for (i in resp) {
+    			json = resp[i];
+    			x.innerHTML += `<p>Description: ${json.description}, Cost: $${json.cost}</p><br>`;
+    		}
+    	}
+    }
+    xhr.send();
 }
 
 function openPendingReimbursements() {
     var x = document.getElementById("content");
-    x.innerHTML = `<h1>Pending</h1>`;
+    x.innerHTML = "<h1>Pending Requests</h1>";
+    
+    let xhr = new XMLHttpRequest();
+    
+    xhr.open("GET", "../PendingReimbursement");
+    xhr.onreadystatechange = function() {
+    	if (xhr.readyState === 4 && xhr.status === 200) {
+    		let resp = JSON.parse(xhr.responseText);
+    		for (i in resp) {
+    			json = resp[i];
+    			x.innerHTML += `<p>Description: ${json.description}, Cost: $${json.cost}</p><br>`;
+    		}
+    	}
+    }
+    xhr.send();
 }
 
 var dropdown = document.getElementsByClassName("dropdown");

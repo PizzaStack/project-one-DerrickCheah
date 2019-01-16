@@ -1,3 +1,7 @@
+window.onload = function() {
+	home();
+}
+
 function openReimbursementRequest() {
     var x = document.getElementById("content");
     x.innerHTML = 
@@ -16,19 +20,89 @@ function openReimbursementRequest() {
         `;
 }
 
-function closeMenus() {
+function home() {
     var x = document.getElementById("content");
-    x.innerHTML = `<h1>Home</h1>`;
+    var y = document.getElementById("userinfo");
+
+    let xhr = new XMLHttpRequest();
+    
+    xhr.open("GET", "../UserInfo");
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            let resp = JSON.parse(xhr.responseText);
+            x.innerHTML = `<h1>Welcome ${resp.Name}<br>
+            Email: ${resp.Email}<br>
+            Username: ${resp.Username}<br>
+            Birthday: ${resp.Birthdate}<br>
+            Address: ${resp.Address}<br>
+            Phone Number: ${resp.Number}<br>
+            SSN: ${resp.SSN}<br></h1>`;
+            
+            y.innerHTML = `<p>Name: ${resp.Name}<br>
+            				Email: ${resp.Email}</p>`;
+        }
+    }
+    xhr.send();
 }
 
 function openResolvedReimbursements() {
     var x = document.getElementById("content");
-    x.innerHTML = `<h1>Resolved</h1>`;
+    x.innerHTML = `<h1>Resolved Reimbursements</h1>`;
+    
+    let xhr = new XMLHttpRequest();
+    
+    xhr.open("GET", "../ResolvedReimbursement");
+    
+    xhr.onreadystatechange = function() {
+    	if (xhr.readyState === 4 && xhr.status === 200) {
+    		let resp = JSON.parse(xhr.responseText);
+    		for (i in resp) {
+    			json = resp[i];
+    			x.innerHTML += `<p>Description: ${json.description}, Cost: $${json.cost}</p><br>`;
+    		}
+    	}
+    }
+    xhr.send();
 }
 
 function openPendingReimbursements() {
     var x = document.getElementById("content");
-    x.innerHTML = `<h1>Pending</h1>`;
+    x.innerHTML = "<h1>Pending Requests</h1>";
+    
+    let xhr = new XMLHttpRequest();
+    
+    xhr.open("GET", "../PendingReimbursement");
+    xhr.onreadystatechange = function() {
+    	if (xhr.readyState === 4 && xhr.status === 200) {
+    		let resp = JSON.parse(xhr.responseText);
+    		for (i in resp) {
+    			json = resp[i];
+    			x.innerHTML += `<p>Description: ${json.description}, Cost: $${json.cost}</p><br>`;
+    		}
+    	}
+    }
+    xhr.send();
+}
+
+function viewEmployees() {
+    var x = document.getElementById("content");
+    x.innerHTML = "<h1>Employee List</h1>";
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open("GET", "../ViewEmployee");
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            let resp = JSON.parse(xhr.responseText);
+            for (i in resp) {
+                json = resp[i];
+                x.innerHTML += `<p>Employee ID: ${json.id}, Employee Name: ${json.firstName + " " + json.lastName}</p><br>`;
+            }
+        }
+    }
+    xhr.send();
 }
 
 var dropdown = document.getElementsByClassName("dropdown");

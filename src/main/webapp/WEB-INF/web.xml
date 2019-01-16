@@ -40,6 +40,33 @@
 		<servlet-name>SubmitReimbursementServlet</servlet-name>
 		<url-pattern>/SubmitReimbursementServlet</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>PendingReimbursementServlet</servlet-name>
+		<servlet-class>com.revature.servlets.PendingReimbursementServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PendingReimbursementServlet</servlet-name>
+		<url-pattern>/PendingReimbursement</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ResolvedReimbursementServlet</servlet-name>
+		<servlet-class>com.revature.servlets.ResolvedReimbursementServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ResolvedReimbursementServlet</servlet-name>
+		<url-pattern>/ResolvedReimbursement</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ViewEmployeeServlet</servlet-name>
+		<servlet-class>com.revature.servlets.ViewEmployeeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ViewEmployeeServlet</servlet-name>
+		<url-pattern>/ViewEmployee</url-pattern>
+	</servlet-mapping>
 
 	<filter>
 		<filter-name>LoginFilter</filter-name>
@@ -49,5 +76,4 @@
 		<filter-name>LoginFilter</filter-name>
 		<url-pattern>/pages/*</url-pattern>
 	</filter-mapping>
-
 </web-app>
