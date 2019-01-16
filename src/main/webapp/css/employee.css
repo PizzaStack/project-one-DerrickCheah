@@ -174,3 +174,7 @@ input[type="file"] {
 	cursor: pointer;
 	width: 20%;
 }
+
+#content {
+	overflow-y: scroll;
+}

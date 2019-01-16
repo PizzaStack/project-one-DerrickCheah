@@ -73,18 +73,41 @@ function home() {
 
 function openResolvedReimbursements() {
     var x = document.getElementById("content");
-    x.innerHTML = `<h1>Resolved Reimbursements</h1>`;
+    x.innerHTML = `
+                    <h1>Pending Requests</h1>
+                    <div class="card">
+    	                <div class="card-body">
+        	                <table class="table">
+            	                <thead>
+               		                <tr>
+                    	                <th scope="col">Employee ID</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Cost</th>
+                                        <th scope="col">Manager</th>
+                	                </tr>
+            	                </thead>
+            	                <tbody id="tablecontent"></tbody>
+        	                </table>
+    	                </div>
+                    </div>`;
     
+    var y = document.getElementById("tablecontent");
+
     let xhr = new XMLHttpRequest();
     
-    xhr.open("GET", "../ResolvedReimbursement");
-    
+    xhr.open("GET", "../ResolvedReimbursementManager");
     xhr.onreadystatechange = function() {
     	if (xhr.readyState === 4 && xhr.status === 200) {
     		let resp = JSON.parse(xhr.responseText);
     		for (i in resp) {
-    			json = resp[i];
-    			x.innerHTML += `<p>Description: ${json.description}, Cost: $${json.cost}</p><br>`;
+                json = resp[i];
+    			y.innerHTML +=  `
+                                <tr>
+                                    <td>${json.id}</td>
+                                    <td>${json.description}</td>
+                                    <td>${json.cost}</td>
+                                    <td>${json.manager}</td>
+                                </tr>`;
     		}
     	}
     }

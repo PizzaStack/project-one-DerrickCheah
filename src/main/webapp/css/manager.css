@@ -162,3 +162,8 @@ input[type="file"] {
 #reimbursementform label {
 	margin: 20px 0 20px 35%;
 }
+
+#content {
+	height: 93%;
+	overflow-y: scroll;
+}

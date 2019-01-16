@@ -85,6 +85,15 @@
 		<servlet-name>PendingReimbursementManagerServlet</servlet-name>
 		<url-pattern>/PendingReimbursementManager</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ResolvedReimbursementManagerServlet</servlet-name>
+		<servlet-class>com.revature.servlets.ResolvedReimbursementManagerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ResolvedReimbursementManagerServlet</servlet-name>
+		<url-pattern>/ResolvedReimbursementManager</url-pattern>
+	</servlet-mapping>
 
 	<filter>
 		<filter-name>LoginFilter</filter-name>
