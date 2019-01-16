@@ -11,7 +11,7 @@ import javax.json.JsonArrayBuilder;
 
 public class ViewEmployeeDAO {
 	
-	private static final String VIEW_EMPLOYEE_LIST = "SELECT employee.id, employee.firstname, employee.lastname FROM employee LEFT JOIN manager on employee.id = manager.id where manager.manger = false";
+	private static final String VIEW_EMPLOYEE_LIST = "SELECT employee.id, employee.firstname, employee.lastname FROM employee LEFT JOIN manager on employee.id = manager.id where manager.manager = false";
 	
 	public JsonArray viewEmployees(Connection connection) {
 		JsonArrayBuilder values = Json.createArrayBuilder();
