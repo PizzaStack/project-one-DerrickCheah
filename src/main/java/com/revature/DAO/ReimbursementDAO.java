@@ -11,10 +11,11 @@ import javax.json.JsonArrayBuilder;
 
 public class ReimbursementDAO {
 
-	private static final String ADD_REIMBURSEMENT_REQUEST = "INSERT INTO reimbursement VALUES (?, ?, ?, true)";
-	private static final String VIEW_PENDING_REQUEST = "SELECT reimbursement.description, reimbursement.cost FROM reimbursement where id = ? and pending = true";
-	private static final String VIEW_RESOLVED_REQUEST = "SELECT reimbursement.description, reimbursement.cost FROM reimbursement where id = ? and pending = false";
-	
+	private static final String ADD_REIMBURSEMENT_REQUEST = "INSERT INTO reimbursement VALUES (?, ?, ?, 'pending')";
+	private static final String VIEW_PENDING_REQUEST = "SELECT reimbursement.description, reimbursement.cost FROM reimbursement where id = ? and status = 'pending'";
+	private static final String VIEW_RESOLVED_REQUEST = "SELECT reimbursement.description, reimbursement.cost FROM reimbursement where id = ? and status = 'approved'";
+	private static final String VIEW_DENIED_REQUEST = "SELECT reimbursement.description, reimbursement.cost FROM reimbursement where id = ? and status = 'denied'";
+
 	public void uploadReimbursement(Connection connection, String description, double expenseCost, long id) {
 		try {
 			PreparedStatement ps = connection.prepareStatement(ADD_REIMBURSEMENT_REQUEST);
@@ -33,11 +34,9 @@ public class ReimbursementDAO {
 			PreparedStatement ps = connection.prepareStatement(VIEW_PENDING_REQUEST);
 			ps.setLong(1, id);
 			ResultSet rs = ps.executeQuery();
-			
-			while(rs.next()) {
-				values.add(Json.createObjectBuilder()
-						.add("description", rs.getString(1))
-						.add("cost", rs.getDouble(2)));
+
+			while (rs.next()) {
+				values.add(Json.createObjectBuilder().add("description", rs.getString(1)).add("cost", rs.getDouble(2)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -45,19 +44,35 @@ public class ReimbursementDAO {
 		JsonArray table = values.build();
 		return table;
 	}
-	
+
 	public JsonArray viewResolved(Connection connection, long id) {
 		JsonArrayBuilder values = Json.createArrayBuilder();
 		try {
 			PreparedStatement ps = connection.prepareStatement(VIEW_RESOLVED_REQUEST);
 			ps.setLong(1, id);
-			
+
 			ResultSet rs = ps.executeQuery();
-			
+
 			while (rs.next()) {
-				values.add(Json.createObjectBuilder()
-						.add("description", rs.getString(1))
-						.add("cost", rs.getDouble(2)));
+				values.add(Json.createObjectBuilder().add("description", rs.getString(1)).add("cost", rs.getDouble(2)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		JsonArray table = values.build();
+		return table;
+	}
+
+	public JsonArray viewDenied(Connection connection, long id) {
+		JsonArrayBuilder values = Json.createArrayBuilder();
+		try {
+			PreparedStatement ps = connection.prepareStatement(VIEW_DENIED_REQUEST);
+			ps.setLong(1, id);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				values.add(Json.createObjectBuilder().add("description", rs.getString(1)).add("cost", rs.getDouble(2)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

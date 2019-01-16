@@ -160,6 +160,47 @@ function openPendingReimbursements() {
     xhr.send();
 }
 
+function openDeniedReimbursements() {
+    var x = document.getElementById("content")
+    
+    x.innerHTML = `
+    <h1>Denied Requests</h1>
+    <div class="card">
+    	<div class="card-body">
+        	<table class="table">
+            	<thead>
+               		<tr>
+                    	<th scope="col">Description</th>
+                    	<th scope="col">Cost</th>
+                	</tr>
+            	</thead>
+            	<tbody id="tablecontent">
+            	</tbody>
+        	</table>
+    	</div>
+    </div>`;
+
+    var y = document.getElementById("tablecontent")
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open("GET", "../DeniedReimbursement");
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            let resp = JSON.parse(xhr.responseText);
+            for (i in resp) {
+                json = resp[i];
+                y.innerHTML += `<tr>
+                                    <td>${json.description}</td>
+                                    <td>$${json.cost}</td>
+                                </tr>`;
+            }
+        }
+    }
+    xhr.send();
+}
+
 var dropdown = document.getElementsByClassName("dropdown");
 var i;
 
