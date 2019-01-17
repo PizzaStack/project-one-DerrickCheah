@@ -2,23 +2,6 @@ window.onload = function() {
 	home();
 }
 
-function openReimbursementRequest() {
-    var x = document.getElementById("content");
-    x.innerHTML = 
-        `<form id="reimbursementform">
-            <h1>Reimbursement Form</h1>
-
-            <label for="description"><b>Description</b></label>
-            <textarea name="description" placeholder="Enter Description..." required></textarea>
-
-            <label for="expensecost"><b>Cost</b></label>
-            <input type="number" step="0.01" name="expensecost" min="0" required>
-
-            <label for="file"><b>Upload Document (Optional)</b></label>
-            <input type="file" class="file" multiple>
-        </form>`;
-}
-
 function home() {
     var x = document.getElementById("content")
     
@@ -196,6 +179,55 @@ function viewEmployees() {
         }
     }
     xhr.send();
+}
+
+function searchRequests() {   
+    var x = document.getElementById("content");
+    x.innerHTML = `
+                    <div class="card">
+    	                <div class="card-body">
+        	                <table class="table">
+            	                <thead>
+               		                <tr>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Cost</th>
+                                        <th scope="col">Approve/Deny</th>
+                	                </tr>
+            	                </thead>
+            	                <tbody id="tablecontent"></tbody>
+        	                </table>
+    	                </div>
+                    </div>`;
+    
+    var y = document.getElementById("tablecontent");
+    
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "../SearchEmployee");
+    xhr.onreadystatechange = function() {
+    	if (xhr.readyState === 4 && xhr.status === 200) {
+            let resp = JSON.parse(xhr.responseText);
+    		for (i in resp) {
+                json = resp[i];
+    			y.innerHTML +=  `
+                                <tr>
+                                    <td>${json.description}</td>
+                                    <td>${json.cost}</td>
+                                </tr>`;
+    		}
+    	}
+    }
+    xhr.send();
+}
+
+function searchForm() {
+    var x = document.getElementById("content");
+    x.innerHTML = `
+                    <h1>Search Requests</h1>
+                    <form id="searchemployee" method="POST" action="../SearchEmployeeServlet">
+                        <label for="description"><b>Employee ID</b></label>
+                        <input type="text" name="id" required>
+                        <button type="submit" id="search" onclick="searchRequests()">Search</button>
+                    </form>`;
 }
 
 var dropdown = document.getElementsByClassName("dropdown");

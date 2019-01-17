@@ -94,6 +94,15 @@
 		<servlet-name>ResolvedReimbursementManagerServlet</servlet-name>
 		<url-pattern>/ResolvedReimbursementManager</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>SearchEmployeeServlet</servlet-name>
+		<servlet-class>com.revature.servlets.SearchEmployeeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SearchEmployeeServlet</servlet-name>
+		<url-pattern>/SearchEmployee</url-pattern>
+	</servlet-mapping>
 
 	<filter>
 		<filter-name>LoginFilter</filter-name>

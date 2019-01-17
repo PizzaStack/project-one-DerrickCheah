@@ -13,6 +13,7 @@ public class ManagerReimbursementDAO {
 
 	private static final String VIEW_PENDING_REQUEST = "SELECT reimbursement.id, reimbursement.description, reimbursement.cost FROM reimbursement where status = 'pending'";
 	private static final String VIEW_RESOLVED_REQUEST = "SELECT reimbursement.id, reimbursement.description, reimbursement.cost, reimbursement.manager FROM reimbursement where status = 'approved'";
+	private static final String VIEW_SINGLE_EMPLOYEE_REQUEST = "SELECT reimbursement.description, reimbursement.cost FROM reimbursement where id = ? and status = 'pending'";
 
 	public JsonArray getPending(Connection connection) {
 		JsonArrayBuilder values = Json.createArrayBuilder();
@@ -40,6 +41,24 @@ public class ManagerReimbursementDAO {
 			while (rs.next()) {
 				values.add(Json.createObjectBuilder().add("id", rs.getInt(1)).add("description", rs.getString(2))
 						.add("cost", rs.getDouble(3)).add("manager", rs.getString(4)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		JsonArray table = values.build();
+		return table;
+	}
+
+	public JsonArray searchEmployee(Connection connection, long id) {
+		JsonArrayBuilder values = Json.createArrayBuilder();
+		try {
+			PreparedStatement ps = connection.prepareStatement(VIEW_SINGLE_EMPLOYEE_REQUEST);
+			ps.setLong(1, id);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				values.add(Json.createObjectBuilder().add("description", rs.getString(1)).add("cost", rs.getDouble(2)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
