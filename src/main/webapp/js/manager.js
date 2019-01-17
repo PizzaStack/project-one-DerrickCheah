@@ -132,6 +132,8 @@ function openPendingReimbursements() {
                                     <td>${json.id}</td>
                                     <td>${json.description}</td>
                                     <td>${json.cost}</td>
+                                    <td><button class="btn-approval" onclick="approveRequest(${json.id})">Approve</button>
+						                    <button class="btn-deny" onclick="denyRequest(${json.id})">Deny</button></td>
                                 </tr>`;
     		}
     	}
@@ -181,9 +183,10 @@ function viewEmployees() {
     xhr.send();
 }
 
-function searchRequests() {   
+function searchRequests(employeeid) {
+	console.log(employeeid);
     var x = document.getElementById("content");
-    x.innerHTML = `
+    x.innerHTML += `
                     <div class="card">
     	                <div class="card-body">
         	                <table class="table">
@@ -216,18 +219,41 @@ function searchRequests() {
     		}
     	}
     }
-    xhr.send();
+    xhr.send(employeeid);
 }
 
 function searchForm() {
     var x = document.getElementById("content");
     x.innerHTML = `
                     <h1>Search Requests</h1>
-                    <form id="searchemployee" method="POST" action="../SearchEmployeeServlet">
+                    <form id="searchemployee">
                         <label for="description"><b>Employee ID</b></label>
-                        <input type="text" name="id" required>
-                        <button type="submit" id="search" onclick="searchRequests()">Search</button>
+                        <input type="number" id="employeeid" min="1" step="1" name="employeeid" required>
+                        <button type="button" id="search" onclick="searchRequests(employeeid.value)">Search</button>
                     </form>`;
+    return false;
+}
+
+function approveRequest(employeeid) {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "../ApproveRequest");
+    xhr.onreadystatechange = function() {
+    	if (xhr.readyState === 4 && xhr.status === 200) {
+
+    	}
+    }
+    xhr.send(employeeid);
+}
+
+function denyRequest(employeeid) {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "../DenyRequest");
+    xhr.onreadystatechange = function() {
+    	if (xhr.readyState === 4 && xhr.status === 200) {
+
+    	}
+    }
+    xhr.send(employeeid);
 }
 
 var dropdown = document.getElementsByClassName("dropdown");

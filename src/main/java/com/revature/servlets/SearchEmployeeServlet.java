@@ -1,5 +1,6 @@
 package com.revature.servlets;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -21,16 +22,18 @@ public class SearchEmployeeServlet extends HttpServlet {
 		CreateConnection createConnection = new CreateConnection();
 		Connection connection = createConnection.getConnection();
 		
-		String input = request.getParameter("id");
-		long id = Long.parseLong(input);
+		BufferedReader br = request.getReader();
+		String line = "";
+		long id = 0;
+		while ((line = br.readLine()) != null) {
+			id = Long.parseLong(line);
+		}
 		
 		ManagerReimbursementDAO mrd = new ManagerReimbursementDAO();
 		JsonArray requests = mrd.searchEmployee(connection, id);
 		
 		PrintWriter out = response.getWriter();
 		out.println(requests);
-		
-		response.sendRedirect("pages/manager.html");
 	}
 
 }
