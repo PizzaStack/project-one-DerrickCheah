@@ -11,10 +11,10 @@ import javax.json.JsonArrayBuilder;
 
 public class ReimbursementDAO {
 
-	private static final String ADD_REIMBURSEMENT_REQUEST = "INSERT INTO reimbursement VALUES (?, ?, ?, 'pending')";
-	private static final String VIEW_PENDING_REQUEST = "SELECT reimbursement.description, reimbursement.cost FROM reimbursement where id = ? and status = 'pending'";
-	private static final String VIEW_RESOLVED_REQUEST = "SELECT reimbursement.description, reimbursement.cost FROM reimbursement where id = ? and status = 'approved'";
-	private static final String VIEW_DENIED_REQUEST = "SELECT reimbursement.description, reimbursement.cost FROM reimbursement where id = ? and status = 'denied'";
+	private static final String ADD_REIMBURSEMENT_REQUEST = "INSERT INTO reimbursement VALUES (?, ?, ?, 'pending', default)";
+	private static final String VIEW_PENDING_REQUEST = "SELECT reimbursement.description, reimbursement.cost, reimbursement.reimbursementid FROM reimbursement where id = ? and status = 'pending'";
+	private static final String VIEW_RESOLVED_REQUEST = "SELECT reimbursement.description, reimbursement.cost, reimbursement.reimbursementid FROM reimbursement where id = ? and status = 'approved'";
+	private static final String VIEW_DENIED_REQUEST = "SELECT reimbursement.description, reimbursement.cost, reimbursement.reimbursementid FROM reimbursement where id = ? and status = 'denied'";
 
 	public void uploadReimbursement(Connection connection, String description, double expenseCost, long id) {
 		try {
@@ -36,7 +36,8 @@ public class ReimbursementDAO {
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				values.add(Json.createObjectBuilder().add("description", rs.getString(1)).add("cost", rs.getDouble(2)));
+				values.add(Json.createObjectBuilder().add("description", rs.getString(1)).add("cost", rs.getDouble(2))
+						.add("refid", rs.getInt(3)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -54,7 +55,8 @@ public class ReimbursementDAO {
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				values.add(Json.createObjectBuilder().add("description", rs.getString(1)).add("cost", rs.getDouble(2)));
+				values.add(Json.createObjectBuilder().add("description", rs.getString(1)).add("cost", rs.getDouble(2))
+						.add("refid", rs.getInt(3)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -72,7 +74,8 @@ public class ReimbursementDAO {
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				values.add(Json.createObjectBuilder().add("description", rs.getString(1)).add("cost", rs.getDouble(2)));
+				values.add(Json.createObjectBuilder().add("description", rs.getString(1)).add("cost", rs.getDouble(2))
+						.add("refid", rs.getInt(3)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

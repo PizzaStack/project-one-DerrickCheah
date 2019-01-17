@@ -62,7 +62,8 @@ function openResolvedReimbursements() {
     	                <div class="card-body">
         	                <table class="table">
             	                <thead>
-               		                <tr>
+                                    <tr>
+                                        <th scope="col">Ref ID</th>
                     	                <th scope="col">Employee ID</th>
                                         <th scope="col">Description</th>
                                         <th scope="col">Cost</th>
@@ -86,6 +87,7 @@ function openResolvedReimbursements() {
                 json = resp[i];
     			y.innerHTML +=  `
                                 <tr>
+                                    <td>${json.refid}</td>
                                     <td>${json.id}</td>
                                     <td>${json.description}</td>
                                     <td>${json.cost}</td>
@@ -105,7 +107,8 @@ function openPendingReimbursements() {
     	                <div class="card-body">
         	                <table class="table">
             	                <thead>
-               		                <tr>
+                                    <tr>
+                                        <th scope="col">Ref ID</th>
                     	                <th scope="col">Employee ID</th>
                                         <th scope="col">Description</th>
                                         <th scope="col">Cost</th>
@@ -129,11 +132,12 @@ function openPendingReimbursements() {
                 json = resp[i];
     			y.innerHTML +=  `
                                 <tr>
+                                    <td>${json.refid}</td>
                                     <td>${json.id}</td>
                                     <td>${json.description}</td>
                                     <td>${json.cost}</td>
-                                    <td><button class="btn-approval" onclick="approveRequest(${json.id})">Approve</button>
-						                    <button class="btn-deny" onclick="denyRequest(${json.id})">Deny</button></td>
+                                    <td><button class="btn-approval" onclick="approveRequest(${json.refid})">Approve</button>
+						                    <button class="btn-deny" onclick="denyRequest(${json.refid})">Deny</button></td>
                                 </tr>`;
     		}
     	}
@@ -184,14 +188,14 @@ function viewEmployees() {
 }
 
 function searchRequests(employeeid) {
-	console.log(employeeid);
     var x = document.getElementById("content");
     x.innerHTML += `
                     <div class="card">
     	                <div class="card-body">
         	                <table class="table">
             	                <thead>
-               		                <tr>
+                                    <tr>
+                                        <th scope="col">Ref ID</th>
                                         <th scope="col">Description</th>
                                         <th scope="col">Cost</th>
                                         <th scope="col">Approve/Deny</th>
@@ -213,8 +217,11 @@ function searchRequests(employeeid) {
                 json = resp[i];
     			y.innerHTML +=  `
                                 <tr>
+                                    <td>${json.refid}</td>
                                     <td>${json.description}</td>
                                     <td>${json.cost}</td>
+                                    <td><button class="btn-approval" onclick="approveRequest(${json.refid})">Approve</button>
+						                    <button class="btn-deny" onclick="denyRequest(${json.refid})">Deny</button></td>
                                 </tr>`;
     		}
     	}
@@ -234,26 +241,29 @@ function searchForm() {
     return false;
 }
 
-function approveRequest(employeeid) {
+function approveRequest(refid) {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "../ApproveRequest");
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function() {
     	if (xhr.readyState === 4 && xhr.status === 200) {
 
     	}
     }
-    xhr.send(employeeid);
+    xhr.send(`refid=${refid}`);
 }
 
-function denyRequest(employeeid) {
+function denyRequest(refid) {
+    console.log(refid);
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "../DenyRequest");
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function() {
     	if (xhr.readyState === 4 && xhr.status === 200) {
 
     	}
     }
-    xhr.send(employeeid);
+    xhr.send(`refid=${refid}`);
 }
 
 var dropdown = document.getElementsByClassName("dropdown");

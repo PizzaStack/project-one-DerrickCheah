@@ -86,7 +86,8 @@ function openResolvedReimbursements() {
         	<table class="table">
             	<thead>
                		<tr>
-                    	<th scope="col">Description</th>
+                        <th scope="col">Ref ID</th>
+                        <th scope="col">Description</th>
                     	<th scope="col">Cost</th>
                 	</tr>
             	</thead>
@@ -108,6 +109,7 @@ function openResolvedReimbursements() {
             for (i in resp) {
                 json = resp[i];
                 y.innerHTML += `<tr>
+                                    <td>${json.refid}</td>
                                     <td>${json.description}</td>
                                     <td>$${json.cost}</td>
                                 </tr>`;
@@ -127,7 +129,8 @@ function openPendingReimbursements() {
     	<div class="card-body">
         	<table class="table">
             	<thead>
-               		<tr>
+                    <tr>
+                        <th scope="col">Ref ID</th>
                     	<th scope="col">Description</th>
                     	<th scope="col">Cost</th>
                 	</tr>
@@ -151,6 +154,7 @@ function openPendingReimbursements() {
             for (i in resp) {
                 json = resp[i];
                 y.innerHTML += `<tr>
+                                    <td>${json.refid}</td>
                                     <td>${json.description}</td>
                                     <td>$${json.cost}</td>
                                 </tr>`;
@@ -169,7 +173,8 @@ function openDeniedReimbursements() {
     	<div class="card-body">
         	<table class="table">
             	<thead>
-               		<tr>
+                    <tr>
+                        <th scope="col">Ref ID</th>
                     	<th scope="col">Description</th>
                     	<th scope="col">Cost</th>
                 	</tr>
@@ -192,6 +197,7 @@ function openDeniedReimbursements() {
             for (i in resp) {
                 json = resp[i];
                 y.innerHTML += `<tr>
+                                    <td>${json.refid}</td>
                                     <td>${json.description}</td>
                                     <td>$${json.cost}</td>
                                 </tr>`;

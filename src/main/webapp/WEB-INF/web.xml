@@ -103,6 +103,24 @@
 		<servlet-name>SearchEmployeeServlet</servlet-name>
 		<url-pattern>/SearchEmployee</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ApproveRequestServlet</servlet-name>
+		<servlet-class>com.revature.servlets.ApproveRequestServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ApproveRequestServlet</servlet-name>
+		<url-pattern>/ApproveRequest</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>DenyRequestServlet</servlet-name>
+		<servlet-class>com.revature.servlets.DenyRequestServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DenyRequestServlet</servlet-name>
+		<url-pattern>/DenyRequest</url-pattern>
+	</servlet-mapping>
 
 	<filter>
 		<filter-name>LoginFilter</filter-name>
