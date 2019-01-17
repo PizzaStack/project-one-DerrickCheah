@@ -1,10 +1,10 @@
-window.onload = function() {
-	home();
+window.onload = function () {
+    home();
 }
 
 function home() {
     var x = document.getElementById("content")
-    
+
     x.innerHTML = `
                     <h1 id="welcome"></h1>
                     <div class="card">
@@ -41,7 +41,7 @@ function home() {
 
             z.innerHTML = `Welcome ${resp.Name}`;
 
-            data.innerHTML +=  `
+            data.innerHTML += `
                                 <tr>
                                     <td>${resp.Username}</td>
                                     <td>${resp.Birthdate}</td>
@@ -74,18 +74,18 @@ function openResolvedReimbursements() {
         	                </table>
     	                </div>
                     </div>`;
-    
+
     var y = document.getElementById("tablecontent");
 
     let xhr = new XMLHttpRequest();
-    
+
     xhr.open("GET", "../ResolvedReimbursementManager");
-    xhr.onreadystatechange = function() {
-    	if (xhr.readyState === 4 && xhr.status === 200) {
-    		let resp = JSON.parse(xhr.responseText);
-    		for (i in resp) {
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            let resp = JSON.parse(xhr.responseText);
+            for (i in resp) {
                 json = resp[i];
-    			y.innerHTML +=  `
+                y.innerHTML += `
                                 <tr>
                                     <td>${json.refid}</td>
                                     <td>${json.id}</td>
@@ -93,8 +93,8 @@ function openResolvedReimbursements() {
                                     <td>${json.cost}</td>
                                     <td>${json.manager}</td>
                                 </tr>`;
-    		}
-    	}
+            }
+        }
     }
     xhr.send();
 }
@@ -119,18 +119,18 @@ function openPendingReimbursements() {
         	                </table>
     	                </div>
                     </div>`;
-    
+
     var y = document.getElementById("tablecontent");
 
     let xhr = new XMLHttpRequest();
-    
+
     xhr.open("GET", "../PendingReimbursementManager");
-    xhr.onreadystatechange = function() {
-    	if (xhr.readyState === 4 && xhr.status === 200) {
-    		let resp = JSON.parse(xhr.responseText);
-    		for (i in resp) {
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            let resp = JSON.parse(xhr.responseText);
+            for (i in resp) {
                 json = resp[i];
-    			y.innerHTML +=  `
+                y.innerHTML += `
                                 <tr>
                                     <td>${json.refid}</td>
                                     <td>${json.id}</td>
@@ -139,15 +139,15 @@ function openPendingReimbursements() {
                                     <td><button class="btn-approval" onclick="approveRequest(${json.refid})">Approve</button>
 						                    <button class="btn-deny" onclick="denyRequest(${json.refid})">Deny</button></td>
                                 </tr>`;
-    		}
-    	}
+            }
+        }
     }
     xhr.send();
 }
 
 function viewEmployees() {
     var x = document.getElementById("content")
-    
+
     x.innerHTML = `
     <h1>Employee List</h1>
     <div class="card">
@@ -171,7 +171,7 @@ function viewEmployees() {
 
     xhr.open("GET", "../ViewEmployee");
 
-    xhr.onreadystatechange = function() {
+    xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             let resp = JSON.parse(xhr.responseText);
             for (i in resp) {
@@ -205,17 +205,17 @@ function searchRequests(employeeid) {
         	                </table>
     	                </div>
                     </div>`;
-    
+
     var y = document.getElementById("tablecontent");
-    
+
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "../SearchEmployee");
-    xhr.onreadystatechange = function() {
-    	if (xhr.readyState === 4 && xhr.status === 200) {
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
             let resp = JSON.parse(xhr.responseText);
-    		for (i in resp) {
+            for (i in resp) {
                 json = resp[i];
-    			y.innerHTML +=  `
+                y.innerHTML += `
                                 <tr>
                                     <td>${json.refid}</td>
                                     <td>${json.description}</td>
@@ -223,8 +223,8 @@ function searchRequests(employeeid) {
                                     <td><button class="btn-approval" onclick="approveRequest(${json.refid})">Approve</button>
 						                    <button class="btn-deny" onclick="denyRequest(${json.refid})">Deny</button></td>
                                 </tr>`;
-    		}
-    	}
+            }
+        }
     }
     xhr.send(employeeid);
 }
@@ -245,10 +245,10 @@ function approveRequest(refid) {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "../ApproveRequest");
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.onreadystatechange = function() {
-    	if (xhr.readyState === 4 && xhr.status === 200) {
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
 
-    	}
+        }
     }
     xhr.send(`refid=${refid}`);
 }
@@ -258,12 +258,36 @@ function denyRequest(refid) {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "../DenyRequest");
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.onreadystatechange = function() {
-    	if (xhr.readyState === 4 && xhr.status === 200) {
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
 
-    	}
+        }
     }
     xhr.send(`refid=${refid}`);
+}
+
+function openSettings() {
+    var x = document.getElementById("content");
+    x.innerHTML = `<h1>Settings</h1>
+                    <form id="settingsform" method="POST" action="../UpdateSettings">
+
+                        <label for="firstname"><b>First Name</b></label>
+                        <input type="text" placeholder="First Name" name="firstname><br>
+
+                        <label for="lastname"><b>Last Name</b></label>
+                        <input type="text" placeholder="Last Name" name="lastname"><br>
+
+                        <label for="password"><b>Password</b></label>
+                        <input type="password" placeholder="Password" name="password"><br>
+
+                        <label for="address"><b>Address</b></label>
+                        <input type="text" placeholder="Address" name="address"><br>
+
+                        <label for="phone"><b>Phone Number</b></label>
+                        <input type="text" placeholder="XXX-XXX-XXXX" name="number"><br>  
+    
+                        <button type="submit" id="submitsettings">Update</button>
+                        </form>`;
 }
 
 var dropdown = document.getElementsByClassName("dropdown");

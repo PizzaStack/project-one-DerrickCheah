@@ -207,6 +207,30 @@ function openDeniedReimbursements() {
     xhr.send();
 }
 
+function openSettings() {
+    var x = document.getElementById("content");
+    x.innerHTML = `<h1>Settings</h1>
+                    <form id="settingsform" method="POST" action="../UpdateSettings">
+
+                        <label for="firstname"><b>First Name</b></label>
+                        <input type="text" placeholder="First Name" name="firstname><br>
+
+                        <label for="lastname"><b>Last Name</b></label>
+                        <input type="text" placeholder="Last Name" name="lastname"><br>
+
+                        <label for="password"><b>Password</b></label>
+                        <input type="password" placeholder="Password" name="password"><br>
+
+                        <label for="address"><b>Address</b></label>
+                        <input type="text" placeholder="Address" name="address"><br>
+
+                        <label for="phone"><b>Phone Number</b></label>
+                        <input type="text" placeholder="XXX-XXX-XXXX" name="number"><br>  
+    
+                        <button type="submit" id="submitsettings">Update</button>
+                        </form>`;
+}
+
 var dropdown = document.getElementsByClassName("dropdown");
 var i;
 

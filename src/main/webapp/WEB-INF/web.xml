@@ -121,6 +121,15 @@
 		<servlet-name>DenyRequestServlet</servlet-name>
 		<url-pattern>/DenyRequest</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>UpdateSettingsServlet</servlet-name>
+		<servlet-class>com.revature.servlets.UpdateSettingsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateSettingsServlet</servlet-name>
+		<url-pattern>/UpdateSettings</url-pattern>
+	</servlet-mapping>
 
 	<filter>
 		<filter-name>LoginFilter</filter-name>
