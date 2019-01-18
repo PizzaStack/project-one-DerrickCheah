@@ -26,8 +26,6 @@ public class UpdateSettingsServlet extends HttpServlet {
 		String address = request.getParameter("address");
 		String number = request.getParameter("number");
 		
-		System.out.println(number);
-		
 		User user = (User) request.getSession(false).getAttribute("user");
 		SettingsDAO sd = new SettingsDAO();
 		

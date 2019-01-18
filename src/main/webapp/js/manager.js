@@ -136,8 +136,8 @@ function openPendingReimbursements() {
                                     <td>${json.id}</td>
                                     <td>${json.description}</td>
                                     <td>${json.cost}</td>
-                                    <td><button class="btn-approval" onclick="approveRequest(${json.refid})">Approve</button>
-						                    <button class="btn-deny" onclick="denyRequest(${json.refid})">Deny</button></td>
+                                    <td><button class="btn-approval" onclick="approveRequest(${json.refid}, 'pending', 0)">Approve</button>
+						                    <button class="btn-deny" onclick="denyRequest(${json.refid}, 'pending', 0)">Deny</button></td>
                                 </tr>`;
             }
         }
@@ -188,8 +188,8 @@ function viewEmployees() {
 }
 
 function searchRequests(employeeid) {
-    var x = document.getElementById("content");
-    x.innerHTML += `
+    var x = document.getElementById("tabledata");
+    x.innerHTML = `
                     <div class="card">
     	                <div class="card-body">
         	                <table class="table">
@@ -220,8 +220,8 @@ function searchRequests(employeeid) {
                                     <td>${json.refid}</td>
                                     <td>${json.description}</td>
                                     <td>${json.cost}</td>
-                                    <td><button class="btn-approval" onclick="approveRequest(${json.refid})">Approve</button>
-						                    <button class="btn-deny" onclick="denyRequest(${json.refid})">Deny</button></td>
+                                    <td><button class="btn-approval" onclick="approveRequest(${json.refid}, 'search', ${employeeid})">Approve</button>
+						                    <button class="btn-deny" onclick="denyRequest(${json.refid}, 'search', ${employeeid})">Deny</button></td>
                                 </tr>`;
             }
         }
@@ -237,33 +237,47 @@ function searchForm() {
                         <label for="description"><b>Employee ID</b></label>
                         <input type="number" id="employeeid" min="1" step="1" name="employeeid" required>
                         <button type="button" id="search" onclick="searchRequests(employeeid.value)">Search</button>
-                    </form>`;
+                    </form>
+                    <div id="tabledata"></div>`;
     return false;
 }
 
-function approveRequest(refid) {
+function approveRequest(refid, a, employeeid) {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "../ApproveRequest");
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
+            if(a === 'pending') {
+                openPendingReimbursements();
+            }
 
+            if (a === 'search') {
+                searchRequests(employeeid);
+            }
         }
     }
     xhr.send(`refid=${refid}`);
+    alert("Reimbursement Approved");
 }
 
-function denyRequest(refid) {
-    console.log(refid);
+function denyRequest(refid, a, employeeid) {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "../DenyRequest");
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
+            if(a === 'pending') {
+                openPendingReimbursements();
+            }
 
+            if (a === 'search') {
+                searchRequests(employeeid);
+            }
         }
     }
     xhr.send(`refid=${refid}`);
+    alert("Reimbursement Denied");
 }
 
 function openSettings() {
@@ -272,7 +286,7 @@ function openSettings() {
                     <form id="settingsform" method="POST" action="../UpdateSettings">
 
                         <label for="firstname"><b>First Name</b></label>
-                        <input type="text" placeholder="First Name" name="firstname><br>
+                        <input type="text" placeholder="First Name" name="firstname"><br>
 
                         <label for="lastname"><b>Last Name</b></label>
                         <input type="text" placeholder="Last Name" name="lastname"><br>
@@ -286,8 +300,8 @@ function openSettings() {
                         <label for="phone"><b>Phone Number</b></label>
                         <input type="text" placeholder="XXX-XXX-XXXX" name="number"><br>  
     
-                        <button type="submit" id="submitsettings">Update</button>
-                        </form>`;
+                        <button type="submit" id="submitsettings" onclick="alert('Information Updated')">Update</button>
+                    </form>`;
 }
 
 var dropdown = document.getElementsByClassName("dropdown");

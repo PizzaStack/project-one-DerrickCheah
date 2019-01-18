@@ -71,7 +71,7 @@ function openReimbursementRequest() {
             <label for="file"><b>Upload Document (Optional)</b></label>
             <input type="file" class="file" multiple>
             
-            <button type="submit" id="submitreimbursement">Submit</button>
+            <button type="submit" id="submitreimbursement" onclick="alert('Reimbursement Request Submitted')">Submit</button>
         </form>
         `;
 }
@@ -213,7 +213,7 @@ function openSettings() {
                     <form id="settingsform" method="POST" action="../UpdateSettings">
 
                         <label for="firstname"><b>First Name</b></label>
-                        <input type="text" placeholder="First Name" name="firstname><br>
+                        <input type="text" placeholder="First Name" name="firstname"><br>
 
                         <label for="lastname"><b>Last Name</b></label>
                         <input type="text" placeholder="Last Name" name="lastname"><br>
@@ -227,7 +227,7 @@ function openSettings() {
                         <label for="phone"><b>Phone Number</b></label>
                         <input type="text" placeholder="XXX-XXX-XXXX" name="number"><br>  
     
-                        <button type="submit" id="submitsettings">Update</button>
+                        <button type="submit" id="submitsettings" onclick="alert('Information Updated')">Update</button>
                         </form>`;
 }
 

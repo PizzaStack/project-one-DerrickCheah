@@ -118,19 +118,6 @@
 	left: 15%;
 }
 
-input[type="number"] {
-	display: block;
-	width: 30%;
-	border-radius: 20px;
-	padding-left: 20px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	padding-right: 5px;
-	margin: 20px 35% 20px 35%;
-	box-sizing: border-box;
-	border: 1px solid #ccc;
-}
-
 input[type="number"]:focus {
 	outline: none;
 }
@@ -166,4 +153,12 @@ input[type="file"] {
 #content {
 	height: 93%;
 	overflow-y: scroll;
+}
+
+#searchemployee label {
+	display: inline;
+}
+
+#searchemployee input {
+	display: inline;
 }
